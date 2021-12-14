@@ -46,8 +46,8 @@ private String[] fromBrowser() throws IOException{
 
 private void receiveRequest(String[] fromBrowser) {
 
-    String method = requestingArgs[0];
-    String url = requestingArgs[1];
+    String method = fromBrowser[0];
+    String link = fromBrowser[1];
 
     if (!method.equals("Get")){
         this.writer.writeString("405 method");
@@ -59,13 +59,15 @@ private void receiveRequest(String[] fromBrowser) {
         return;
     } else {
         String fileDir = file.Opt.get();
-        if(fileHandler.isPNG(link)){
+        if(isPNG(link)){
             this.writePNG()
         }
         this.writePage(fileDir);
         return;
     }
 }
+
+
 private void write405(String method){
     String title = "HTTP/1.1 405 Method not Allowed";
     String message = method + "not supported";
