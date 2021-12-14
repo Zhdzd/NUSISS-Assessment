@@ -1,0 +1,15 @@
+body{
+    background-color: lavender;
+}
+
+
+.image {
+  display: flex;
+    justify-content: center;
+    
+    }
+
+div{
+    display: flex;
+    justify-content: center;
+}
