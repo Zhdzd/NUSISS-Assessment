@@ -11,6 +11,7 @@ public class HttpClientConnection implements Runnable{
     private BufferedReader reader;
     private HttpWriter writer;
     private Object write;
+ 
     
     
 public HttpClientConnection(Socket socket){
@@ -60,7 +61,7 @@ private void receiveRequest(String[] fromBrowser) {
     } else {
         String fileDir = file.Opt.get();
         if(isPNG(link)){
-            this.writePNG()
+            this.writePNG();
         }
         this.writePage(fileDir);
         return;
@@ -81,18 +82,31 @@ private void write405(String method){
     }
 
     }
-    private void writePage(String filedir){
+   /* private void writePage(String filedir){
         String header = "Http/1.1 200 ok";
-        List<String> contents = fileHandler.getContents(fileDir);
+        String content= new list;
         try{
             writer.writeString(header);
             writer.writeString();
             for (String html: contents){
                 writer.writeString(html);
             }
+        }*/
+        }*/
+    
+    private void writePNG(String fileLoc){
+        String header = "Http/1.1 200 ok";
+        String contentType = "image/png";
+        try{
+            byte[] imageBytes = fileDir;
+            writer.writeString(header);
+            writer.writeString(contentType);
+            writer.writeString();
+            writer.writeBytes();
+            writer.close();
+
         }
     }
-}
 
     
   
