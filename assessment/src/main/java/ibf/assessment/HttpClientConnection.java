@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.Socket;
+import java.nio.file.Paths;
 
 public class HttpClientConnection implements Runnable{
     private final Socket socket;
@@ -25,6 +26,17 @@ public void run(){
         e.printStackTrace();
     }
 }
+private void initializeStreams() {
+
+    try {
+        reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+        writer = new HttpWriter(socket.getOutputStream());
+    } catch(IOException e){
+        e.printStackTrace();
+        System.out.println("Error when initializing input/output streams");
+    }
+    return;
+}
 
 private String[] fromBrowser() throws IOException{
     String requesting = reader.readLine();
@@ -38,22 +50,48 @@ private void receiveRequest(String[] fromBrowser) {
     String url = requestingArgs[1];
 
     if (!method.equals("Get")){
-        this.write.writeString("405 method");
-        return null;
+        this.writer.writeString("405 method");
+        return;
+    }
+    if(!Paths.get(link).toFile().exists()){
+        this.writer.writeString("404 not found\n");
+        this.writer.writeString(link + "not found");
+        return;
+    } else {
+        String fileDir = file.Opt.get();
+        if(fileHandler.isPNG(link)){
+            this.writePNG()
+        }
+        this.writePage(fileDir);
+        return;
     }
 }
-
-private void initializeStreams() {
-
+private void write405(String method){
+    String title = "HTTP/1.1 405 Method not Allowed";
+    String message = method + "not supported";
     try {
-        reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-        writer = new HttpWriter(socket.getInputStream());
-    } catch(IOException e){
-        e.printStackTrace();
-        System.out.println("Error when initializing input/output streams");
+        writer.writeString(title);
+        writer.writeString();
+        writer.writeString(message);
+        writer.close();
+    } catch (Exception e){
+        System.out.println("cant reach to browser");
     }
-    return;
+
+    }
+    private void writePage(String filedir){
+        String header = "Http/1.1 200 ok";
+        List<String> contents = fileHandler.getContents(fileDir);
+        try{
+            writer.writeString(header);
+            writer.writeString();
+            for (String html: contents){
+                writer.writeString(html);
+            }
+        }
+    }
 }
+
     
   
 }
