@@ -3,6 +3,7 @@ package ibf.assessment;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.nio.file.Files;
 
 public class Main {
     public static void main(String[] args) throws IOException{
@@ -25,11 +26,7 @@ public class Main {
        HttpServer server = new HttpServer(port, docRoot);
        server.start();
        
-
        
-      
-        
-        
     }
 
 
