@@ -82,7 +82,7 @@ private void write405(String method){
     }
 
     }
-   /* private void writePage(String filedir){
+    private void writePage(String filedir){
         String header = "Http/1.1 200 ok";
         String content= new list;
         try{
@@ -91,8 +91,8 @@ private void write405(String method){
             for (String html: contents){
                 writer.writeString(html);
             }
-        }*/
-        }*/
+        }
+    
     
     private void writePNG(String fileLoc){
         String header = "Http/1.1 200 ok";

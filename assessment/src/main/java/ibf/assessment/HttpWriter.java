@@ -7,8 +7,8 @@ public class HttpWriter {
 
     private final OutputStream out;
 
-    public HttpWriter(InputStream inputStream) {
-        this.out = inputStream;
+    public HttpWriter(OutputStream out) {
+        this.out = out;
     }
 
 	 public void flush() throws Exception {
