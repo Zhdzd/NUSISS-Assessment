@@ -32,6 +32,11 @@ public class HttpServer {
         return;
         }
     }
+
+    private void startingServer() throws IOException{
+        while(true){
+            Socket socket = ss.accept();
+        }
      void initializeServer() {
          try{
              this.ss = new ServerSocket(port);
@@ -39,25 +44,7 @@ public class HttpServer {
              System.out.println("port "+port +"having issues..starting");
          }
 
-    private void startingServer() throws IO Exception{
-        while(true){
-            Socket socket = ss.accept();
-        }
-
-    }
 
 
-
-    // put inside httpserver)
-
-
-    
-     
-    
-    
-
-    
-    
-
-   
+    } 
 }

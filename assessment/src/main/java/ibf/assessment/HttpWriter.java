@@ -1,5 +1,5 @@
 // TODO: Change to your package 
-package mywebserver;
+package  ibf.assessment;
 
 import java.io.*;
 
@@ -7,8 +7,8 @@ public class HttpWriter {
 
     private final OutputStream out;
 
-    public HttpWriter(OutputStream out) {
-        this.out = out;
+    public HttpWriter(InputStream inputStream) {
+        this.out = inputStream;
     }
 
 	 public void flush() throws Exception {
