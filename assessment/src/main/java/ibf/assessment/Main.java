@@ -9,10 +9,8 @@ public class Main {
         int port = 3000;
         String[] docRoot = new String[]{};
 
-        ServerSocket server = new ServerSocket(3000);
-        Socket socket = server.accept();
        
-       // HttpServer httpServer = new HttpServer(0, args);
+       // HTTp start on port 3000
 
        if (args.length == 2){
         port = Integer.parseInt(args[1]);
@@ -22,7 +20,11 @@ public class Main {
         System.out.println("Server listening at port 3000");
        }
 
+    
 
+       HttpServer server = new HttpServer(port, docRoot);
+       server.start();
+       
 
        
       
