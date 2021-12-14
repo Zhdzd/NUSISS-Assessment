@@ -9,6 +9,7 @@ public class HttpClientConnection implements Runnable{
     private final Socket socket;
     private BufferedReader reader;
     private HttpWriter writer;
+    private Object write;
     
     
 public HttpClientConnection(Socket socket){
@@ -25,8 +26,6 @@ public void run(){
     }
 }
 
-
-
 private String[] fromBrowser() throws IOException{
     String requesting = reader.readLine();
     String[] requestingArgs =requesting.split(" ");
@@ -38,7 +37,10 @@ private void receiveRequest(String[] fromBrowser) {
     String method = requestingArgs[0];
     String url = requestingArgs[1];
 
-    if 
+    if (!method.equals("Get")){
+        this.write.writeString("405 method");
+        return null;
+    }
 }
 
 private void initializeStreams() {
